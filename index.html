@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Make Your Mind Peace</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4fbf9;margin:0;color:#333}
+header{background:#7ed6c2;padding:20px;text-align:center;color:white}
+nav{display:flex;gap:20px;justify-content:center;background:#e6f7f3;padding:10px}
+nav a{cursor:pointer;font-weight:bold}
+section{max-width:900px;margin:auto;padding:30px}
+.card{background:white;border-radius:10px;padding:20px;margin:20px 0;box-shadow:0 4px 10px rgba(0,0,0,0.05)}
+button{padding:10px 16px;border:none;border-radius:6px;background:#7ed6c2;color:white;cursor:pointer}
+.moods span{font-size:28px;margin:10px;cursor:pointer}
+textarea{width:100%;height:80px;margin-top:10px}
+audio{width:100%;margin-top:10px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Make Your Mind Peace</h1>
+<p>Track your feelings and find calm</p>
+</header>
+
+<nav>
+<a onclick="show('home')">Home</a>
+<a onclick="show('journal')">Mood Journal</a>
+<a onclick="show('insights')">Mood Insights</a>
+<a onclick="show('meditation')">Meditation</a>
+<a onclick="show('music')">Relax Music</a>
+</nav>
+
+<section id="home">
+<div class="card">
+<h2>Welcome</h2>
+<p>This space helps you track emotions and relax your mind.</p>
+</div>
+</section>
+
+<section id="journal" class="hidden">
+<div class="card">
+<h2>How do you feel today?</h2>
+<div class="moods">
+<span onclick="selectMood(5)">😊</span>
+<span onclick="selectMood(4)">🙂</span>
+<span onclick="selectMood(3)">😐</span>
+<span onclick="selectMood(2)">😟</span>
+<span onclick="selectMood(1)">😢</span>
+</div>
+<textarea id="note" placeholder="Write something about your day..."></textarea>
+<br/><br/>
+<button onclick="saveMood()">Save</button>
+<p id="status"></p>
+</div>
+</section>
+
+<section id="insights" class="hidden">
+<div class="card">
+<h2>Your Mood Trend</h2>
+<canvas id="chart"></canvas>
+</div>
+</section>
+
+<section id="meditation" class="hidden">
+<div class="card">
+<h2>5 Minute Breathing Meditation</h2>
+<p>Breathe in for 4 seconds, hold 2 seconds, breathe out for 6 seconds.</p>
+<audio controls>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9d1b6d6f8b.mp3" type="audio/mpeg">
+</audio>
+</div>
+</section>
+
+<section id="music" class="hidden">
+<div class="card">
+<h2>Relaxing Rain</h2>
+<audio controls>
+<source src="https://cdn.pixabay.com/download/audio/2021/09/06/audio_5f6f1d6a7d.mp3" type="audio/mpeg">
+</audio>
+</div>
+</section>
+
+<script>
+let selectedMood=null
+
+function show(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'))
+ document.getElementById(id).classList.remove('hidden')
+ if(id==='insights') drawChart()
+</html>
